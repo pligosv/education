@@ -9,7 +9,7 @@ import java.util.List;
 1. Посчитать количество финишировавших лошадей и возвратить его. Используй метод isFinished().
 2. Если лошадь еще не пришла к финишу (!isFinished()), то:
 2.1. Вывести в консоль "Waiting for " + horse.getName().
-2.2. Подождать, пока она завершит гонку. Подумай, какой метод нужно использовать для этого
+2.2. Подождать, пока она завершит гонку. Подумай, какой метод нужно использовать для этого.
 */
 
 public class Solution {
@@ -24,11 +24,13 @@ public class Solution {
     public static int calculateHorsesFinished(List<Horse> horses) throws InterruptedException {
         int countFinished = 0;
         //add your implementation here - добавь свою реалзацию тут
-        for (int i = 0; i < countHorses; i++) {
+        for (Horse horse : horses) {
+            if (horse.isFinished()) {
+                countFinished++;
+            } else {
+                System.out.println("Waiting for " + horse.getName());
 
-            if(!horses.get(i).isFinished()){
-                System.out.println("Waiting for "+ horses.get(i).getName());
-                horses.get(i).join();
+                horse.join();
             }
         }
         return countFinished;

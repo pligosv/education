@@ -12,15 +12,18 @@ public class Solution {
 
     public static void main(String[] args) throws InterruptedException {
         Politic ivanov = new Politic("Иванов");
+        ivanov.join();
         Politic petrov = new Politic("Петров");
         Politic sidorov = new Politic("Сидоров");
 
         while (ivanov.getCountSpeaches() + petrov.getCountSpeaches() + sidorov.getCountSpeaches() < totalCountSpeeches) {
         }
-
         System.out.println(ivanov);
+
         System.out.println(petrov);
         System.out.println(sidorov);
+
+
     }
 
     public static class Politic extends Thread {
