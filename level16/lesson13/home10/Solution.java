@@ -1,9 +1,6 @@
 package com.javarush.test.level16.lesson13.home10;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /* Последовательный вывод файлов
 1. Разберись, что делает программа.
@@ -24,6 +21,19 @@ public class Solution {
     public static String firstFileName;
     public static String secondFileName;
 
+    static {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            firstFileName = reader.readLine();
+            secondFileName = reader.readLine();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     public static void main(String[] args) throws InterruptedException {
         systemOutPrintln(firstFileName);
         systemOutPrintln(secondFileName);
@@ -33,6 +43,7 @@ public class Solution {
         ReadFileInterface f = new ReadFileThread();
         f.setFileName(fileName);
         f.start();
+        f.join();
         System.out.println(f.getFileContent());
     }
 
@@ -45,5 +56,39 @@ public class Solution {
         void join() throws InterruptedException;
 
         void start();
+    }
+
+    public static class ReadFileThread extends Thread implements ReadFileInterface {
+        private String fileName;
+        private String fileContent;
+
+        @Override
+        public void setFileName(String fullFileName) {
+            this.fileName = fullFileName;
+        }
+
+        @Override
+        public String getFileContent() {
+            return fileContent;
+        }
+
+        public void run(){
+            StringBuilder stringBuilder = new StringBuilder();
+            String key;
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(fileName));
+                while (true) {
+                    key=reader.readLine();
+                    if(key==null) break;
+                    stringBuilder.append(key + " ");
+                }
+                fileContent=stringBuilder.toString();
+                reader.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
