@@ -17,16 +17,16 @@ public class Solution {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String path = reader.readLine();
         FileInputStream fileInputStream = new FileInputStream(path);
-        while(fileInputStream.available()>1000){
-            path=reader.readLine();
-            fileInputStream=new FileInputStream(path);
+        while (fileInputStream.available() > 1000) {
+            path = reader.readLine();
+            fileInputStream = new FileInputStream(path);
         }
         reader.close();
         fileInputStream.close();
         throw new DownloadException();
     }
 
-    public static class DownloadException extends Exception{
+    public static class DownloadException extends Exception {
 
     }
 }
