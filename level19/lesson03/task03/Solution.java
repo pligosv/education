@@ -23,6 +23,7 @@ public class Solution {
         countries.put("CA", "Canada");
     }
 
+
     public static class IncomeDataAdapter implements Customer, Contact {
 
         private IncomeData data;
@@ -33,22 +34,24 @@ public class Solution {
 
         @Override
         public String getName() {
-            return data.getContactLastName() + "," + data.getContactFirstName();
+            return data.getContactLastName() + ", " + data.getContactFirstName();
         }
 
         @Override
         public String getPhoneNumber() {
-            return null;
+            String number = String.format("%010d", data.getPhoneNumber());
+            return String.format("+%d(%s)%s-%s-%s", data.getCountryPhoneCode(), number.substring(0, 3), number.substring(3, 6), number.substring(6, 8), number.substring(8));
         }
 
         @Override
         public String getCompanyName() {
-            return null;
+            return data.getCompany();
+
         }
 
         @Override
         public String getCountryName() {
-            return null;
+            return countries.get(data.getCountryCode());
         }
     }
 
