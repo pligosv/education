@@ -1,7 +1,6 @@
 package com.javarush.test.level18.lesson10.home08;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,23 +16,14 @@ import java.util.Map;
 public class Solution {
     public static Map<String, Integer> resultMap = new HashMap<String, Integer>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
-        while(true){
-            String path = reader.readLine();
-            if("exit".equals(path)) break;
-            ReadThread readThread = new ReadThread(path);
-
-        }
 
     }
 
     public static class ReadThread extends Thread {
         public ReadThread(String fileName) {
             //implement constructor body
-            start();
-
         }
         // implement file reading here - реализуйте чтение из файла тут
     }
