@@ -7,11 +7,22 @@ package com.javarush.test.level19.lesson05.task01;
 Закрыть потоки ввода-вывода.
 */
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Solution {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String path1 = reader.readLine();
+        String path2 = reader.readLine();
+        FileReader fileReader = new FileReader(path1);
+        FileWriter fileWriter = new FileWriter(path2);
+        while (fileReader.ready()) {
+            int tmp = fileReader.read();
+            int data = fileReader.read();
+            fileWriter.write(data);
+        }
+        reader.close();
+        fileReader.close();
+        fileWriter.close();
     }
 }
